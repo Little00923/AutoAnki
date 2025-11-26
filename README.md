@@ -31,19 +31,18 @@ npm start
 ## 首页模型选择（默认配置）
 | 厂商 | Base URL | 示例模型 |
 | --- | --- | --- |
-| OpenAI | https://api.openai.com/v1 | gpt-4o-mini / gpt-4o / gpt-4-turbo / gpt-3.5-turbo |
-| Claude | https://api.anthropic.com | claude-3-5-sonnet-20241022 / claude-3-opus-20240229 / claude-3-5-haiku-latest |
-| Gemini | https://generativelanguage.googleapis.com/v1beta | gemini-1.5-pro-002 / gemini-1.5-flash-002 / gemini-1.5-flash-8b |
+| OpenAI | https://api.openai.com/v1 | gpt-4o-mini / gpt-4o / gpt-3.5-turbo |
+| Claude | https://api.anthropic.com | claude-3-5-sonnet-20241022 / claude-3-opus-20240229 / claude-3-haiku-20240307 |
+| Gemini | https://generativelanguage.googleapis.com/v1beta | gemini-1.5-pro-002 / gemini-1.5-flash-002 / gemini-1.5-flash-8b / gemini-1.0-pro |
 | DeepSeek | https://api.deepseek.com/v1 | deepseek-chat / deepseek-reasoner |
 | Qwen (DashScope兼容) | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus / qwen-max |
 
-在页面可直接切换厂商、手动覆盖模型名与 Base URL；API Key 不会被保存（仅随本次请求发送）。
+在页面可直接切换厂商并从下拉选择模型，支持自定义 Base URL；API Key 不会被保存（仅随本次请求发送）。
 
-## 与原版的区别
-- 删除：用户系统、积分/支付、数据库读写、PayPal/微信/支付宝等支付逻辑  
-- 删除：账号相关前端页面与接口（auth / user-center / payment 目录等）  
-- 新增：多厂商选择面板、自定义 Base URL、前端可临时填入 API Key  
-- 保留：卡片生成规则、编辑与导出体验，整体 UI/交互保持一致
+## 版本说明
+- 仅包含：AI 制卡、预览/编辑、APKG 导出、多厂商模型切换  
+- 不包含：账号体系、积分/支付、数据库和相关运维文档  
+- 交互保持简洁：主页选择厂商/模型，手填 API Key 即可使用；Shift+制卡为本地示例模式
 
 ## 最小验证（用你自己的 Key）
 可用 curl 直连后端验证调用是否通畅（替换 provider/model/baseURL/apiKey）：
