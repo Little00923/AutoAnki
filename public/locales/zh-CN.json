@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "AutoAnki",
+    "slogan": "AI驱动的智能制卡工具"
+  },
+  "home": {
+    "title": "AI驱动的智能制卡工具",
+    "subtitle": "让学习更高效，让记忆更轻松",
+    "inputPlaceholder": "在此输入您的学习材料...",
+    "generateBtn": "制卡",
+    "generateBtnLoading": "生成中...",
+    "exportBtn": "导出Anki卡包",
+    "clearBtn": "返回重新制卡",
+    "cardsGenerated": "已生成 {count} 张卡片",
+    "cardCount": "生成卡片数量：",
+    "maxCards": "最多20张",
+    "demoHint": "按住 Shift 再点击“制卡”可直接使用示例数据"
+  },
+  "provider": {
+    "title": "选择 AI 提供商与模型",
+    "subtitle": "支持 OpenAI、Claude、Gemini、DeepSeek、Qwen，可自定义代理 URL",
+    "providerLabel": "厂商",
+    "modelLabel": "模型",
+    "baseUrlLabel": "API Base URL",
+    "baseUrlHint": "可改为代理或自建网关地址",
+    "apiKeyLabel": "API Key（必填）",
+    "apiKeyHint": "密钥仅随本次请求发送，不会被保存或写入服务器",
+    "manualKey": "请手动输入 API Key，服务器不会保存或提供默认密钥"
+  },
+  "common": {
+    "loading": "加载中...",
+    "confirm": "确认",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "success": "成功",
+    "error": "错误",
+    "warning": "警告",
+    "info": "提示"
+  }
+}

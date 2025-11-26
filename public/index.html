@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoAnki - AI-Powered Flashcard Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="notification.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="top-navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <div class="brand">
+                    <span class="brand-name">AutoAnki</span>
+                    <span class="brand-badge">Open</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="language-selector">
+                    <button class="lang-btn" data-lang="en" onclick="i18n.switchLanguage('en')">EN</button>
+                    <button class="lang-btn" data-lang="zh" onclick="i18n.switchLanguage('zh')">中文</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 输入页面 -->
+    <div id="inputPage" class="page active">
+        <div class="container">
+            <h1 class="title" data-i18n="app.name">AutoAnki</h1>
+            <p class="subtitle" data-i18n="home.subtitle">让学习更高效，让记忆更轻松</p>
+
+            <div class="provider-panel">
+                <div class="panel-header">
+                    <h3 data-i18n="provider.title">选择 AI 提供商与模型</h3>
+                    <p class="provider-subtitle" data-i18n="provider.subtitle">支持 OpenAI、Claude、Gemini、DeepSeek、Qwen，可自定义 URL</p>
+                </div>
+                <div class="provider-grid">
+                    <div class="form-group">
+                        <label for="providerSelect" data-i18n="provider.providerLabel">厂商</label>
+                        <select id="providerSelect"></select>
+                        <small id="providerStatus" class="helper-text"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelSelect" data-i18n="provider.modelLabel">模型</label>
+                        <select id="modelSelect"></select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="baseUrlInput" data-i18n="provider.baseUrlLabel">API Base URL</label>
+                        <input id="baseUrlInput" placeholder="https://api.openai.com/v1">
+                        <small class="helper-text" data-i18n="provider.baseUrlHint">可改为代理或自建网关地址</small>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="apiKeyInput" data-i18n="provider.apiKeyLabel">API Key（必填）</label>
+                        <input id="apiKeyInput" type="password" autocomplete="off" placeholder="请手动填写 API Key">
+                        <small class="helper-text" data-i18n="provider.apiKeyHint">密钥只随本次请求发送，不会保存到服务器或浏览器</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <div class="textarea-wrapper">
+                    <textarea 
+                        id="materialInput" 
+                        class="material-input" 
+                        data-i18n-placeholder="home.inputPlaceholder"
+                        placeholder="Enter your learning materials here..."
+                    ></textarea>
+                    <div class="char-counter">
+                        <span id="charCount">0</span> / <span id="charLimit">4000</span>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="control-section">
+                <div class="card-count-section">
+                    <label for="cardCount" data-i18n="home.cardCount">生成卡片数量：</label>
+                    <input type="number" id="cardCount" value="10" min="1" max="20">
+                    <span class="hint-text">(<span data-i18n="home.maxCards">最多20张</span>)</span>
+                </div>
+                <button id="generateBtn" class="primary-btn" data-i18n="home.generateBtn">制卡</button>
+                <p class="helper-text demo-note" data-i18n="home.demoHint">按住 Shift 点击「制卡」可使用示例数据</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 预览页面 -->
+    <div id="previewPage" class="page">
+        <div class="container">
+            <div class="header">
+                <h2 id="statusText" data-i18n="home.generateBtnLoading">卡片生成中...</h2>
+                <button id="exportBtn" class="primary-btn" disabled data-i18n="home.exportBtn">导出</button>
+            </div>
+
+            <div id="cardsContainer" class="cards-container">
+                <!-- 卡片将动态插入这里 -->
+            </div>
+
+            <div id="pagination" class="pagination">
+                <!-- 分页将动态生成 -->
+            </div>
+
+            <div class="back-section">
+                <button id="backBtn" class="secondary-btn" data-i18n="home.clearBtn">返回重新制卡</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载提示 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p data-i18n="common.loading">正在生成卡片，请稍候...</p>
+    </div>
+
+    <script src="notification.js"></script>
+    <script src="i18n.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "AutoAnki",
+    "slogan": "AI-Powered Flashcard Generator"
+  },
+  "home": {
+    "title": "AI-Powered Flashcard Generator",
+    "subtitle": "Make Learning Efficient, Make Memory Easy",
+    "inputPlaceholder": "Enter your learning materials here...",
+    "generateBtn": "Generate",
+    "generateBtnLoading": "Generating...",
+    "exportBtn": "Export Anki Deck",
+    "clearBtn": "Back to Generate",
+    "cardsGenerated": "{count} cards generated",
+    "cardCount": "Number of cards:",
+    "maxCards": "Max 20",
+    "demoHint": "Hold Shift + click Generate to use built-in demo data"
+  },
+  "provider": {
+    "title": "Choose Provider & Model",
+    "subtitle": "Works with OpenAI, Claude, Gemini, DeepSeek, Qwen; override base URLs for proxies",
+    "providerLabel": "Provider",
+    "modelLabel": "Model",
+    "baseUrlLabel": "API Base URL",
+    "baseUrlHint": "Point to your proxy or self-hosted gateway if needed",
+    "apiKeyLabel": "API Key (required)",
+    "apiKeyHint": "Key is sent only with this request and never stored",
+    "manualKey": "Please paste your API key; the server does not keep or inject any key"
+  },
+  "common": {
+    "loading": "Loading...",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
+  }
+}

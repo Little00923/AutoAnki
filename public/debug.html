@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试工具 - AutoAnki</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        h2 { color: #333; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 3px; overflow-x: auto; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>🔧 AutoAnki 调试工具</h1>
+    
+    <div class="section">
+        <h2>1. 检查登录状态</h2>
+        <button onclick="checkAuth()">检查认证</button>
+        <button onclick="clearToken()">清除Token</button>
+        <pre id="authResult"></pre>
+    </div>
+    
+    <div class="section">
+        <h2>2. 测试API</h2>
+        <button onclick="testConfig()">测试配置API</button>
+        <button onclick="testAuthMe()">测试用户API</button>
+        <pre id="apiResult"></pre>
+    </div>
+    
+    <div class="section">
+        <h2>3. 检查首页元素</h2>
+        <button onclick="checkIndexPage()">检查首页DOM</button>
+        <pre id="domResult"></pre>
+    </div>
+    
+    <div class="section">
+        <h2>4. 导航测试</h2>
+        <button onclick="goToIndex()">跳转首页</button>
+        <button onclick="goToUserCenter()">跳转用户中心</button>
+        <button onclick="goToAuth()">跳转登录页</button>
+    </div>
+    
+    <div class="section">
+        <h2>5. localStorage 状态</h2>
+        <button onclick="checkStorage()">查看存储</button>
+        <button onclick="clearStorage()">清除所有存储</button>
+        <pre id="storageResult"></pre>
+    </div>
+
+    <script>
+        // 检查认证状态
+        async function checkAuth() {
+            const result = document.getElementById('authResult');
+            const token = localStorage.getItem('token');
+            
+            result.textContent = '检查中...\n\n';
+            result.textContent += '=== Token 状态 ===\n';
+            
+            if (!token) {
+                result.textContent += '❌ 未登录（无token）\n';
+                return;
+            }
+            
+            result.textContent += '✓ 已登录\n';
+            result.textContent += 'Token 前20字符: ' + token.substring(0, 20) + '...\n';
+            result.textContent += 'Token 长度: ' + token.length + '\n\n';
+            
+            // 解析 token
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                result.textContent += '=== Token 内容 ===\n';
+                result.textContent += JSON.stringify(payload, null, 2) + '\n\n';
+                
+                // 检查是否过期
+                const exp = payload.exp * 1000;
+                const now = Date.now();
+                if (exp < now) {
+                    result.textContent += '❌ Token 已过期\n';
+                } else {
+                    result.textContent += '✓ Token 有效（还有 ' + Math.floor((exp - now) / 1000 / 60 / 60) + ' 小时）\n';
+                }
+            } catch (e) {
+                result.textContent += '❌ Token 格式错误: ' + e.message + '\n';
+            }
+        }
+        
+        function clearToken() {
+            localStorage.removeItem('token');
+            document.getElementById('authResult').textContent = '✓ Token 已清除';
+        }
+        
+        // 测试配置API
+        async function testConfig() {
+            const result = document.getElementById('apiResult');
+            result.textContent = '测试配置API...\n\n';
+            
+            try {
+                const response = await fetch('/api/config');
+                result.textContent += 'HTTP 状态: ' + response.status + '\n';
+                const data = await response.json();
+                result.textContent += 'API 响应:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.textContent += '❌ 错误: ' + error.message;
+            }
+        }
+        
+        // 测试用户API
+        async function testAuthMe() {
+            const result = document.getElementById('apiResult');
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                result.textContent = '❌ 未登录，无法测试';
+                return;
+            }
+            
+            result.textContent = '测试用户API...\n\n';
+            
+            try {
+                const response = await fetch('/api/auth/me', {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+                result.textContent += 'HTTP 状态: ' + response.status + '\n';
+                const data = await response.json();
+                result.textContent += 'API 响应:\n' + JSON.stringify(data, null, 2);
+            } catch (error) {
+                result.textContent += '❌ 错误: ' + error.message;
+            }
+        }
+        
+        // 检查首页DOM
+        function checkIndexPage() {
+            const result = document.getElementById('domResult');
+            result.textContent = '正在检查首页元素...\n\n';
+            
+            // 使用 iframe 加载首页
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = './';
+            document.body.appendChild(iframe);
+            
+            iframe.onload = function() {
+                const doc = iframe.contentDocument;
+                const elements = [
+                    'inputPage', 'previewPage', 'materialInput', 'cardCount',
+                    'generateBtn', 'exportBtn', 'backBtn', 'cardsContainer',
+                    'pagination', 'statusText', 'loadingOverlay',
+                    'navGuest', 'navUser', 'navUserCredits', 'guestTrialRemaining'
+                ];
+                
+                result.textContent += '=== DOM 元素检查 ===\n';
+                elements.forEach(id => {
+                    const el = doc.getElementById(id);
+                    if (el) {
+                        result.textContent += '✓ ' + id + '\n';
+                    } else {
+                        result.textContent += '❌ ' + id + ' (缺失)\n';
+                    }
+                });
+                
+                result.textContent += '\n=== 脚本标签 ===\n';
+                const scripts = doc.getElementsByTagName('script');
+                for (let script of scripts) {
+                    result.textContent += '- ' + (script.src || '(inline)') + '\n';
+                }
+                
+                document.body.removeChild(iframe);
+            };
+            
+            iframe.onerror = function() {
+                result.textContent += '❌ 无法加载首页';
+                document.body.removeChild(iframe);
+            };
+        }
+        
+        // 检查存储
+        function checkStorage() {
+            const result = document.getElementById('storageResult');
+            result.textContent = '=== localStorage ===\n';
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                let value = localStorage.getItem(key);
+                
+                // 对于 token，只显示前后部分
+                if (key === 'token' && value.length > 40) {
+                    value = value.substring(0, 20) + '...' + value.substring(value.length - 10);
+                }
+                
+                result.textContent += key + ': ' + value + '\n';
+            }
+            
+            if (localStorage.length === 0) {
+                result.textContent += '(空)\n';
+            }
+        }
+        
+        function clearStorage() {
+            if (confirm('确定要清除所有 localStorage 数据吗？')) {
+                localStorage.clear();
+                document.getElementById('storageResult').textContent = '✓ 已清除所有存储';
+            }
+        }
+        
+        // 导航
+        function goToIndex() {
+            window.location.href = './';
+        }
+        
+        function goToUserCenter() {
+            window.location.href = 'user-center.html';
+        }
+        
+        function goToAuth() {
+            window.location.href = 'auth.html';
+        }
+        
+        // 页面加载时自动检查
+        window.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            checkStorage();
+        });
+    </script>
+    <script src="i18n.js"></script>
+</body>
+</html>
+
+
