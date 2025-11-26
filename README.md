@@ -1,6 +1,6 @@
 # AutoAnki Open 
 
-功能：**AI 制卡 + 预览编辑 + APKG 导出** 
+功能：**AI 制卡 + 预览编辑 + APKG 导出** 效果可参考：https://autoanki.xyz/
 
 ## 特性
 - 🎯 输入学习材料，一键生成 Anki 卡片，支持编辑与分页预览  
