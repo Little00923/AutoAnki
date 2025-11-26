@@ -1,4 +1,103 @@
 # AutoAnki Open 
+ ---
+
+Feature set: AI card creation + preview/edit + APKG export. Live example: https://autoanki.xyz/                 
+                                                                                                                  
+  ## Highlights                                                                                                   
+                                                                                                                  
+  - 🎯 Paste study materials and generate Anki cards in one click, with editing and paged preview                 
+  - 🔌 Pick AI provider/model on the page; custom Base URL supported (proxy/self-hosted gateway)                  
+  - 🗝️ API Key must be entered on the page (sent only for this request; never stored on server/browser)           
+  - 🧳 Export .apkg deck for direct import into Anki                                                              
+  - 🧪 Built-in demo data (use demoMode: true in the request to try)                                              
+                                                                                                                  
+  ## Quick Start                                                                                                  
+                                                                                                                  
+  1. Env: Node.js 18+                                                                                             
+  2. Install deps (needs internet or local npm cache)                                                             
+                                                                                                                  
+  npm install                                                                                                     
+                                                                                                                  
+  > In offline/restricted environments, prepare npm cache yourself or generate package-lock.json where you have   
+  > internet, then copy it.                                                                                       
+                                                                                                                  
+  3. Run (API Key required on the page)                                                                           
+                                                                                                                  
+  npm start                                                                                                       
+  # Visit http://localhost:3000                                                                                   
+                                                                                                                  
+  > To adjust default Base URL/model, copy .env.example to .env and edit; the server does not inject any API key— 
+  > enter it on the page.                                                                                         
+                                                                                                                  
+  4. Required steps                                                                                               
+                                                                                                                  
+  - On the homepage, choose a provider, then a model, and paste your API key; otherwise calls will fail.          
+  - Hold Shift and click “Generate” to use built-in demo data for UI verification.                                
+                                                                                                                  
+  ## Provider & model options (defaults)                                                                          
+                                                                                                                  
+  | Provider | Base URL | Example models |                                                                        
+  | --- | --- | --- |                                                                                             
+  | OpenAI | https://api.openai.com/v1 | gpt-4o-mini / gpt-4o / gpt-3.5-turbo |                                   
+  | Claude | https://api.anthropic.com | claude-3-5-sonnet-20241022 / claude-3-opus-20240229 / claude-3-haiku-    
+  20240307 |                                                                                                      
+  | Gemini | https://generativelanguage.googleapis.com/v1beta | gemini-1.5-pro-002 / gemini-1.5-flash-002 /       
+  gemini-1.5-flash-8b / gemini-1.0-pro |                                                                          
+  | DeepSeek | https://api.deepseek.com/v1 | deepseek-chat / deepseek-reasoner |                                  
+  | Qwen (DashScope-compatible) | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus /    
+  qwen-max |                                                                                                      
+                                                                                                                  
+  You can switch provider and pick models from the dropdown, and override Base URL if needed. API keys are never  
+  stored.                                                                                                         
+                                                                                                                  
+  ## Version notes                                                                                                
+                                                                                                                  
+  - Includes: AI card generation, preview/edit, APKG export, multi-provider model switching                       
+  - Excludes: account system, credits/payments, databases, and related ops docs                                   
+  - Simple UX: pick provider/model, paste API key; Shift+Generate for local demo mode                             
+                                                                                                                  
+  ## Minimal verification (with your own key)                                                                     
+                                                                                                                  
+  Use curl to hit the backend (replace provider/model/baseURL/apiKey):                                            
+                                                                                                                  
+  curl -X POST http://localhost:3000/api/generate-cards \                                                         
+    -H "Content-Type: application/json" \                                                                         
+    -d '{                                                                                                         
+      "material":"short test text",                                                                               
+      "cardCount":1,                                                                                              
+      "language":"zh",                                                                                            
+      "provider":"deepseek",                                                                                      
+      "model":"deepseek-chat",                                                                                    
+      "baseURL":"https://api.deepseek.com/v1",                                                                    
+      "apiKey":"YOUR_KEY"                                                                                         
+    }'                                                                                                            
+                                                                                                                  
+  If cards is returned, it worked; otherwise check the error field.                                               
+                                                                                                                  
+  ## Main scripts                                                                                                 
+                                                                                                                  
+  - npm start: launch Express static site + API                                                                   
+  - npm run dev: nodemon hot reload                                                                               
+                                                                                                                  
+  ## Directory overview                                                                                           
+                                                                                                                  
+  - public/: frontend pages/assets (entry: public/index.html)                                                     
+  - server.js: backend entry; exposes /api/generate-cards, /api/export-apkg, /api/providers                       
+  - .env.example: sample environment variables (multi-provider defaults)                                          
+                                                                                                                  
+  ## FAQ                                                                                                          
+                                                                                                                  
+  - Only the listed models? Yes, the dropdown enforces known-stable models; to expand, add stable model names in  
+    server.js under PROVIDERS.                                                                                    
+  - No default key? For security, the server never injects keys; paste them on the page.                          
+  - 401/403? Check that your key is valid and the Base URL/model matches the provider’s requirements.             
+  - Slow/failing calls? Point Base URL to your proxy/gateway, or use Shift+Generate to verify the frontend flow   
+    first.                                                                                                        
+                                                                                                                  
+  ## Contributing                                                                                                 
+                                                                                                                  
+  PRs and issues are welcome—help us improve model support and deployment options.
+---
 
 功能：**AI 制卡 + 预览编辑 + APKG 导出** 效果可参考：https://autoanki.xyz/
 
