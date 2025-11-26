@@ -94,9 +94,7 @@ Feature set: AI card creation + preview/edit + APKG export. Live example: https:
   - Slow/failing calls? Point Base URL to your proxy/gateway, or use Shift+Generate to verify the frontend flow   
     first.                                                                                                        
                                                                                                                   
-  ## Contributing                                                                                                 
-                                                                                                                  
-  PRs and issues are welcome—help us improve model support and deployment options.
+
 ---
 
 功能：**AI 制卡 + 预览编辑 + APKG 导出** 效果可参考：https://autoanki.xyz/
