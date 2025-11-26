@@ -1,4 +1,4 @@
-# AutoAnki Open (Lite)
+# AutoAnki 
 
 功能： **AI 制卡 + 预览编辑 + APKG 导出** ，示例请见 https://autoanki.xyz/ ，内置deepseek
 
