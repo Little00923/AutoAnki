@@ -1,6 +1,6 @@
 # AutoAnki Open (Lite)
 
-开源精简版，保留了 **AI 制卡 + 预览编辑 + APKG 导出** 的核心能力，移除了账号、支付、数据库等依赖，并新增多模型/厂商选择。
+功能： **AI 制卡 + 预览编辑 + APKG 导出** ，示例请见 https://autoanki.xyz/ ，内置deepseek
 
 Feature set: **AI card creation + preview/edit + APKG export**. Live example: https://autoanki.xyz/
 
