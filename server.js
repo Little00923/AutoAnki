@@ -529,7 +529,6 @@ app.listen(PORT, () => {
 ╚══════════════════════════════════════╝
 
 访问: http://localhost:${PORT}
-默认模型: ${PROVIDERS[DEFAULT_PROVIDER].defaultModel}
 可用提供商: ${Object.keys(PROVIDERS).join(', ')}
 `);
 });
