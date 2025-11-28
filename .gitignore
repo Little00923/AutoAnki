@@ -3,6 +3,7 @@ node_modules/
 *.apkg
 .DS_Store
 *.log
+:LOCALAPPDATA\npm-cache/
 
 
 
