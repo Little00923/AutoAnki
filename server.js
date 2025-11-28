@@ -44,9 +44,13 @@ const PROVIDERS = {
         id: 'gemini',
         name: 'Gemini (Google)',
         type: 'gemini',
-        defaultBaseURL: process.env.GEMINI_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta',
-        defaultModel: process.env.GEMINI_MODEL || 'gemini-1.5-pro-002',
-        models: ['gemini-1.5-pro-002', 'gemini-1.5-flash-002', 'gemini-1.5-flash-8b', 'gemini-1.0-pro']
+        defaultBaseURL: process.env.GEMINI_BASE_URL || 'https://generativelanguage.googleapis.com/v1',
+        // Google官方文档推荐的通用模型 ID（v1）
+        defaultModel: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+        models: [
+            'gemini-2.5-pro',
+            'gemini-2.5-flash'
+        ]
     }
 };
 
@@ -306,8 +310,14 @@ async function callGemini({ baseURL, model, apiKey, systemPrompt, userPrompt }) 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
-            systemInstruction: { parts: [{ text: systemPrompt }] },
+            // Gemini generateContent (REST) uses contents; some deployments reject system_instruction,
+            // so embed system prompt into the first user turn to keep compatibility.
+            contents: [
+                {
+                    role: 'user',
+                    parts: [{ text: `${systemPrompt}\n\n${userPrompt}` }]
+                }
+            ],
             generationConfig: { temperature: 0.7 }
         })
     });

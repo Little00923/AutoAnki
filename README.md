@@ -36,7 +36,7 @@ npm start
 | --- | --- | --- |
 | OpenAI | https://api.openai.com/v1 | gpt-4o-mini / gpt-4o / gpt-3.5-turbo |
 | Claude | https://api.anthropic.com | claude-3-5-sonnet-20241022 / claude-3-opus-20240229 / claude-3-haiku-20240307 |
-| Gemini | https://generativelanguage.googleapis.com/v1beta | gemini-1.5-pro-002 / gemini-1.5-flash-002 / gemini-1.5-flash-8b / gemini-1.0-pro |
+| Gemini | https://generativelanguage.googleapis.com/v1 | gemini-2.5-pro / gemini-2.5-flash |
 | DeepSeek | https://api.deepseek.com/v1 | deepseek-chat / deepseek-reasoner |
 | Qwen | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus / qwen-max |
 
@@ -107,7 +107,7 @@ npm start
 | --- | --- | --- |
 | OpenAI | https://api.openai.com/v1 | gpt-4o-mini / gpt-4o / gpt-3.5-turbo |
 | Claude | https://api.anthropic.com | claude-3-5-sonnet-20241022 / claude-3-opus-20240229 / claude-3-haiku-20240307 |
-| Gemini | https://generativelanguage.googleapis.com/v1beta | gemini-1.5-pro-002 / gemini-1.5-flash-002 / gemini-1.5-flash-8b / gemini-1.0-pro |
+| Gemini | https://generativelanguage.googleapis.com/v1 | gemini-2.5-pro / gemini-2.5-flash |
 | DeepSeek | https://api.deepseek.com/v1 | deepseek-chat / deepseek-reasoner |
 | Qwen | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus / qwen-max |
 
