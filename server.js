@@ -26,7 +26,7 @@ const PROVIDERS = {
     },
     qwen: {
         id: 'qwen',
-        name: 'Qwen / 通义千问 (兼容模式)',
+        name: 'Qwen / 通义千问',
         type: 'openai',
         defaultBaseURL: process.env.QWEN_BASE_URL || 'https://dashscope.aliyuncs.com/compatible-mode/v1',
         defaultModel: process.env.QWEN_MODEL || 'qwen-turbo',

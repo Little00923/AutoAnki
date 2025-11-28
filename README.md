@@ -38,7 +38,7 @@ npm start
 | Claude | https://api.anthropic.com | claude-3-5-sonnet-20241022 / claude-3-opus-20240229 / claude-3-haiku-20240307 |
 | Gemini | https://generativelanguage.googleapis.com/v1beta | gemini-1.5-pro-002 / gemini-1.5-flash-002 / gemini-1.5-flash-8b / gemini-1.0-pro |
 | DeepSeek | https://api.deepseek.com/v1 | deepseek-chat / deepseek-reasoner |
-| Qwen (DashScope兼容) | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus / qwen-max |
+| Qwen | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus / qwen-max |
 
 可直接切换厂商并从下拉选择模型，支持自定义 Base URL；API Key 不会被保存。
 
@@ -109,7 +109,7 @@ npm start
 | Claude | https://api.anthropic.com | claude-3-5-sonnet-20241022 / claude-3-opus-20240229 / claude-3-haiku-20240307 |
 | Gemini | https://generativelanguage.googleapis.com/v1beta | gemini-1.5-pro-002 / gemini-1.5-flash-002 / gemini-1.5-flash-8b / gemini-1.0-pro |
 | DeepSeek | https://api.deepseek.com/v1 | deepseek-chat / deepseek-reasoner |
-| Qwen (DashScope) | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus / qwen-max |
+| Qwen | https://dashscope.aliyuncs.com/compatible-mode/v1 | qwen-turbo / qwen-plus / qwen-max |
 
 Dropdown enforces known-stable models; Base URL override supported. Keys are never stored.
 
