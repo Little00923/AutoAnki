@@ -1,6 +1,6 @@
 # AutoAnki 
 
-功能： **AI 制卡 + 预览编辑 + APKG 导出** ，示例请见 https://autoanki.xyz/ ，内置deepseek
+功能： **AI 制卡 + 预览编辑 + APKG 导出** ，示例请见 https://autoanki.xyz/ ，内置deepseek和longcat，longcat目前可以多次试用。
 
 Feature set: **AI card creation + preview/edit + APKG export**. Live example: https://autoanki.xyz/
 
