@@ -47,24 +47,9 @@ npm start
 - 不含：账号、积分/支付、数据库和运维文档  
 - 交互简洁：选厂商/模型 + 手填 API Key；Shift+制卡为本地示例
 
-## 🇨🇳 最小验证（用你的 Key）
-```bash
-curl -X POST http://localhost:3000/api/generate-cards \
-  -H "Content-Type: application/json" \
-  -d '{
-    "material":"简短测试文本",
-    "cardCount":1,
-    "language":"zh",
-    "provider":"deepseek",
-    "model":"deepseek-chat",
-    "baseURL":"https://api.deepseek.com/v1",
-    "apiKey":"YOUR_KEY"
-  }'
-```
-返回包含 `cards` 即成功；报错会有 `error` 字段。
 
 ## 🇨🇳 主要脚本
-- `npm start`：启动 Express 静态站点 + API
+- `npm start`：启动 
 - `npm run dev`：nodemon 热重载
 
 ## 🇨🇳 目录速览
@@ -117,22 +102,6 @@ Dropdown enforces known-stable models; Base URL override supported. Keys are nev
 - Includes: AI card generation, preview/edit, APKG export, multi-provider switching  
 - Excludes: accounts, credits/payments, databases, ops docs  
 - Simple UX: pick provider/model, paste API key; Shift+Generate for local demo
-
-## Minimal Check (curl)
-```bash
-curl -X POST http://localhost:3000/api/generate-cards \
-  -H "Content-Type: application/json" \
-  -d '{
-    "material":"short test text",
-    "cardCount":1,
-    "language":"zh",
-    "provider":"deepseek",
-    "model":"deepseek-chat",
-    "baseURL":"https://api.deepseek.com/v1",
-    "apiKey":"YOUR_KEY"
-  }'
-```
-If `cards` is present, it worked; otherwise check `error`.
 
 ## Scripts
 - `npm start`: launch Express + API
